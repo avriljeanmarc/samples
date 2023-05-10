@@ -24,15 +24,13 @@ declare -ar PROJECT_NAMES=(
     # TODO(DomesticMouse): version solving failed
     # "desktop_photo_search/fluent_ui"
     "desktop_photo_search/material"
-    "experimental/context_menus"
+    # TODO(DomesticMouse): The function can't be unconditionally invoked because it can be 'null'.
+    # "experimental/context_menus"
     "experimental/element_embedding_demo"
-    # TODO(DomesticMouse): 'setMockMethodCallHandler' is deprecated and shouldn't be used.
-    # "experimental/federated_plugin/federated_plugin"
-    # TODO(DomesticMouse): 'setMockMethodCallHandler' is deprecated and shouldn't be used.
-    # "experimental/federated_plugin/federated_plugin/example"
+    "experimental/federated_plugin/federated_plugin"
+    "experimental/federated_plugin/federated_plugin/example"
     "experimental/federated_plugin/federated_plugin_macos"
-    # TODO(DomesticMouse): 'setMockMethodCallHandler' is deprecated and shouldn't be used.
-    # "experimental/federated_plugin/federated_plugin_platform_interface"
+    "experimental/federated_plugin/federated_plugin_platform_interface"
     "experimental/federated_plugin/federated_plugin_web"
     "experimental/federated_plugin/federated_plugin_windows"
     "experimental/linting_tool"
@@ -51,7 +49,8 @@ declare -ar PROJECT_NAMES=(
     "jsonexample"
     # TODO(DomesticMouse): Use 'const' with the constructor to improve performance.
     # "material_3_demo"
-    "navigation_and_routing"
+    # TODO(DomesticMouse): The '!' will have no effect because the receiver can't be null.
+    # "navigation_and_routing"
     # TODO(DomesticMouse): Use 'const' with the constructor to improve performance.
     # "place_tracker"
     # TODO(DomesticMouse): 'setMockMethodCallHandler' is deprecated and shouldn't be used.
