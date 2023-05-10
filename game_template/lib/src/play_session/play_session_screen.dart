@@ -20,6 +20,7 @@ import '../level_selection/levels.dart';
 import '../player_progress/player_progress.dart';
 import '../style/confetti.dart';
 import '../style/palette.dart';
+import 'level_one.dart';
 
 class PlaySessionScreen extends StatefulWidget {
   final GameLevel level;
@@ -33,13 +34,14 @@ class PlaySessionScreen extends StatefulWidget {
 class _PlaySessionScreenState extends State<PlaySessionScreen> {
   static final _log = Logger('PlaySessionScreen');
 
-  static const _celebrationDuration = Duration(milliseconds: 2000);
+  static const _celebrationDuration = Duration(milliseconds: 3000);
 
   static const _preCelebrationDuration = Duration(milliseconds: 500);
 
   bool _duringCelebration = false;
 
   late DateTime _startOfPlay;
+  late Widget wid;
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +56,17 @@ class _PlaySessionScreenState extends State<PlaySessionScreen> {
           ),
         ),
       ],
-      child: IgnorePointer(
-        ignoring: _duringCelebration,
+      child: SafeArea(
         child: Scaffold(
           backgroundColor: palette.backgroundPlaySession,
-          body: Stack(
-            children: [
-              Center(
-                // This is the entirety of the "game".
-                child: Column(
+          body: IgnorePointer(
+            ignoring: _duringCelebration,
+            child: Stack(
+              children: [
+                Center(
+                  child: wid,
+                  // This is the entirety of the "game".
+                  /*child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Align(
@@ -100,19 +104,20 @@ class _PlaySessionScreenState extends State<PlaySessionScreen> {
                       ),
                     ),
                   ],
+                ),*/
                 ),
-              ),
-              SizedBox.expand(
-                child: Visibility(
-                  visible: _duringCelebration,
-                  child: IgnorePointer(
-                    child: Confetti(
-                      isStopped: !_duringCelebration,
+                SizedBox.expand(
+                  child: Visibility(
+                    visible: _duringCelebration,
+                    child: IgnorePointer(
+                      child: Confetti(
+                        isStopped: !_duringCelebration,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -124,6 +129,12 @@ class _PlaySessionScreenState extends State<PlaySessionScreen> {
     super.initState();
 
     _startOfPlay = DateTime.now();
+
+    switch (widget.level.number) {
+      case 1:
+        wid = LevelOne();
+        break;
+    }
 
     // Preload ad for the win screen.
     final adsRemoved =

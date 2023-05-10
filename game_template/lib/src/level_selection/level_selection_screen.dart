@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../audio/audio_controller.dart';
 import '../audio/sounds.dart';
 import '../player_progress/player_progress.dart';
+import '../style/chrono_model.dart';
 import '../style/palette.dart';
 import '../style/responsive_screen.dart';
 import 'levels.dart';
@@ -47,11 +48,39 @@ class LevelSelectionScreen extends StatelessWidget {
                       onTap: () {
                         final audioController = context.read<AudioController>();
                         audioController.playSfx(SfxType.buttonTap);
+                        /*GoRouter.of(context)
+                            .go('/play/session/${level.number}');*/
 
-                        GoRouter.of(context)
-                            .go('/play/session/${level.number}');
+                        showDialog<void>(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(
+                                  'Instructions',
+                                  style: TextStyle(
+                                    fontFamily: 'Permanent Marker',
+                                  ),
+                                ),
+                                content: Text(
+                                    '5 secondes pour repondre a une question ...'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      GoRouter.of(context)
+                                          .go('/play/session/${level.number}');
+                                      context
+                                          .read<ChronoModel>()
+                                          .startStopWatch();
+                                    },
+                                    child: Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            });
                       },
-                      leading: Text(level.number.toString()),
+                      //leading: Text(level.number.toString()),
                       title: Text('Level #${level.number}'),
                     )
                 ],

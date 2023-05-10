@@ -43,6 +43,10 @@ List<String> soundTypeToFilename(SfxType type) {
       return const [
         'swishswish1.mp3',
       ];
+    case SfxType.unlockGame:
+      return const [
+        'unlock_game_notification_253.wav',
+      ];
   }
 }
 
@@ -58,6 +62,8 @@ double soundTypeToVolume(SfxType type) {
     case SfxType.erase:
     case SfxType.swishSwish:
       return 1.0;
+    case SfxType.unlockGame:
+      return 4.0;
   }
 }
 
@@ -68,4 +74,5 @@ enum SfxType {
   congrats,
   erase,
   swishSwish,
+  unlockGame,
 }
